@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyboardKinect", "KeyboardKinect\KeyboardKinect.csproj", "{59B24F03-E9B8-44C7-97EE-36DEA1EA2C66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightBuzz.Vitruvius.FingerTracking", "..\..\..\..\Documents\Projects\Kinect-Finger-Tracking-master\KinectFingerTracking\LightBuzz.Vitruvius.FingerTracking\LightBuzz.Vitruvius.FingerTracking.csproj", "{C7312BB5-22EB-4B9C-9552-C97F0ECD0663}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightBuzz.Vitruvius.FingerTracking", "LightBuzz.Vitruvius.FingerTracking\LightBuzz.Vitruvius.FingerTracking.csproj", "{C7312BB5-22EB-4B9C-9552-C97F0ECD0663}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

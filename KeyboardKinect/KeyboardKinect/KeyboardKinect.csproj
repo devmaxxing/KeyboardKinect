@@ -107,7 +107,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\Documents\Projects\Kinect-Finger-Tracking-master\KinectFingerTracking\LightBuzz.Vitruvius.FingerTracking\LightBuzz.Vitruvius.FingerTracking.csproj">
+    <ProjectReference Include="..\LightBuzz.Vitruvius.FingerTracking\LightBuzz.Vitruvius.FingerTracking.csproj">
       <Project>{c7312bb5-22eb-4b9c-9552-c97f0ecd0663}</Project>
       <Name>LightBuzz.Vitruvius.FingerTracking</Name>
     </ProjectReference>
