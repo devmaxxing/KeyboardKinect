@@ -8,6 +8,11 @@
         Title="MainWindow" Height="1080" Width="1920">
     <Grid Height="424" Width="512">
         <Image Name="camera"/>
-        <Canvas Name="canvas"/>
+        <InkCanvas Name="canvas" EditingMode="None"/>
+        <Button x:Name="setDepthButton" Content="Set Depth" HorizontalAlignment="Left" Margin="0,429,0,-25" VerticalAlignment="Top" Width="75" Click="setDepthButton_click"/>
+        <Button x:Name="setAreaButton" Content="Set Keyboard Area" HorizontalAlignment="Left" Height="20" Margin="80,429,0,-25" VerticalAlignment="Top" Width="115"/>
+        <Button x:Name="addKeyButton" Content="Add Key" HorizontalAlignment="Left" Height="20" Margin="200,429,0,-25" VerticalAlignment="Top" Width="59"/>
+        <Button x:Name="saveKeyboardButton" Content="Save Keyboard" HorizontalAlignment="Left" Height="20" Margin="264,429,0,-25" VerticalAlignment="Top" Width="101"/>
+        <Button x:Name="clearButton" Content="Clear" HorizontalAlignment="Left" Height="20" Margin="370,429,0,-25" VerticalAlignment="Top" Width="40"/>
     </Grid>
 </Window>

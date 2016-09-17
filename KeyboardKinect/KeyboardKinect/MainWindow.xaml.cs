@@ -18,6 +18,9 @@ namespace KeyboardKinect
         private KinectSensor _sensor = null;
         private ColorFrameReader _colorReader = null;
         private DepthFrameReader _depthReader = null;
+        private ushort[] calibrationFrameData = null;
+        private Rect keyboardArea = Rect.Empty;
+        private bool calibrating = false;
 
         /// <summary>
         /// The main window of the app.
@@ -48,7 +51,12 @@ namespace KeyboardKinect
             {
                 if (frame != null)
                 {
-                    camera.Source = frame.ToBitmap();
+                    if (calibrating)
+                    {
+                        frame.CopyFrameDataToArray(calibrationFrameData);
+                        calibrating = false;
+                    }
+                    //camera.Source = frame.ToBitmap();
                 }
             }
         }
@@ -59,7 +67,7 @@ namespace KeyboardKinect
             {
                 if (frame != null)
                 {
-                    //camera.Source = frame.ToBitmap();
+                    camera.Source = frame.ToBitmap();
                 }
             }
         }
@@ -85,6 +93,11 @@ namespace KeyboardKinect
                 _sensor.Close();
                 _sensor = null;
             }
+        }
+
+        private void setDepthButton_click(object sender, RoutedEventArgs e)
+        {
+            calibrating = true;
         }
     }
 }
