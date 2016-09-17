@@ -1,10 +1,11 @@
-﻿using LightBuzz.Vitruvius.FingerTracking;
+﻿using LightBuzz.Vitruvius;
 using Microsoft.Kinect;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 namespace KeyboardKinect
@@ -17,12 +18,6 @@ namespace KeyboardKinect
         private KinectSensor _sensor = null;
         private InfraredFrameReader _infraredReader = null;
         private DepthFrameReader _depthReader = null;
-        private BodyFrameReader _bodyReader = null;
-        private IList<Body> _bodies;
-        private Body _body;
-
-        // Create a new reference of a HandsController.
-        private HandsController _handsController = null;
 
         /// <summary>
         /// The main window of the app.
@@ -41,14 +36,6 @@ namespace KeyboardKinect
                 _infraredReader = _sensor.InfraredFrameSource.OpenReader();
                 _infraredReader.FrameArrived += InfraredReader_FrameArrived;
 
-                _bodyReader = _sensor.BodyFrameSource.OpenReader();
-                _bodyReader.FrameArrived += BodyReader_FrameArrived;
-                _bodies = new Body[_sensor.BodyFrameSource.BodyCount];
-
-                // Initialize the HandsController and subscribe to the HandsDetected event.
-                _handsController = new HandsController();
-                _handsController.HandsDetected += HandsController_HandsDetected;
-
                 _sensor.Open();
             }
         }
@@ -61,11 +48,7 @@ namespace KeyboardKinect
             {
                 if (frame != null)
                 {
-                    // 2) Update the HandsController using the array (or pointer) of the depth depth data, and the tracked body.
-                    using (KinectBuffer buffer = frame.LockImageBuffer())
-                    {
-                        _handsController.Update(buffer.UnderlyingBuffer, _body);
-                    }
+                    camera.Source = frame.ToBitmap();
                 }
             }
         }
@@ -76,54 +59,14 @@ namespace KeyboardKinect
             {
                 if (frame != null)
                 {
-                    camera.Source = frame.ToBitmap();
+                    //camera.Source = frame.ToBitmap();
                 }
             }
         }
 
-        private void BodyReader_FrameArrived(object sender, BodyFrameArrivedEventArgs e)
-        {
-            using (var bodyFrame = e.FrameReference.AcquireFrame())
-            {
-                if (bodyFrame != null)
-                {
-                    bodyFrame.GetAndRefreshBodyData(_bodies);
-
-                    _body = _bodies.Where(b => b.IsTracked).FirstOrDefault();
-                }
-            }
-        }
-
-        private void HandsController_HandsDetected(object sender, HandCollection e)
-        {
-            // Display the results!
-
-            if (e.HandLeft != null)
-            {
-                // Draw fingers.
-                foreach (var finger in e.HandLeft.Fingers)
-                {
-                    DrawEllipse(finger.DepthPoint, Brushes.Red, 4.0);
-                }
-            }
-
-            if (e.HandRight != null)
-            {
-                // Draw fingers.
-                foreach (var finger in e.HandRight.Fingers)
-                {
-                    DrawEllipse(finger.DepthPoint, Brushes.Red, 4.0);
-                }
-            }
-        }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (_bodyReader != null)
-            {
-                _bodyReader.Dispose();
-                _bodyReader = null;
-            }
 
             if (_depthReader != null)
             {
@@ -142,21 +85,6 @@ namespace KeyboardKinect
                 _sensor.Close();
                 _sensor = null;
             }
-        }
-
-        private void DrawEllipse(DepthSpacePoint point, Brush brush, double radius)
-        {
-            Ellipse ellipse = new Ellipse
-            {
-                Width = radius,
-                Height = radius,
-                Fill = brush
-            };
-
-            canvas.Children.Add(ellipse);
-
-            Canvas.SetLeft(ellipse, point.X - radius / 2.0);
-            Canvas.SetTop(ellipse, point.Y - radius / 2.0);
         }
     }
 }

@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KeyboardKinect"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
+        Title="MainWindow" Height="1080" Width="1920">
+    <Grid Height="424" Width="512">
         <Image Name="camera"/>
         <Canvas Name="canvas"/>
     </Grid>

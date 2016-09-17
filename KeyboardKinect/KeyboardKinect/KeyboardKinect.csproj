@@ -36,12 +36,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="LightBuzz.Vitruvius, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Vitruvius.1.0.1\lib\LightBuzz.Vitruvius.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="LightBuzz.Vitruvius.WPF, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Vitruvius.1.0.1\lib\LightBuzz.Vitruvius.WPF.dll</HintPath>
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\LightBuzz.Vitruvius.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Kinect, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
@@ -105,12 +101,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\LightBuzz.Vitruvius.FingerTracking\LightBuzz.Vitruvius.FingerTracking.csproj">
-      <Project>{c7312bb5-22eb-4b9c-9552-c97f0ecd0663}</Project>
-      <Name>LightBuzz.Vitruvius.FingerTracking</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
