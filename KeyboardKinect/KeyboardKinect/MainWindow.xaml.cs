@@ -16,7 +16,7 @@ namespace KeyboardKinect
     public partial class MainWindow : Window
     {
         private KinectSensor _sensor = null;
-        private InfraredFrameReader _infraredReader = null;
+        private ColorFrameReader _colorReader = null;
         private DepthFrameReader _depthReader = null;
 
         /// <summary>
@@ -33,8 +33,8 @@ namespace KeyboardKinect
                 _depthReader = _sensor.DepthFrameSource.OpenReader();
                 _depthReader.FrameArrived += DepthReader_FrameArrived;
 
-                _infraredReader = _sensor.InfraredFrameSource.OpenReader();
-                _infraredReader.FrameArrived += InfraredReader_FrameArrived;
+                _colorReader = _sensor.ColorFrameSource.OpenReader();
+                _colorReader.FrameArrived += ColorReader_FrameArrived;
 
                 _sensor.Open();
             }
@@ -53,7 +53,7 @@ namespace KeyboardKinect
             }
         }
 
-        private void InfraredReader_FrameArrived(object sender, InfraredFrameArrivedEventArgs e)
+        private void ColorReader_FrameArrived(object sender, ColorFrameArrivedEventArgs e)
         {
             using (var frame = e.FrameReference.AcquireFrame())
             {
@@ -74,10 +74,10 @@ namespace KeyboardKinect
                 _depthReader = null;
             }
 
-            if (_infraredReader != null)
+            if (_colorReader != null)
             {
-                _infraredReader.Dispose();
-                _infraredReader = null;
+                _colorReader.Dispose();
+                _colorReader = null;
             }
 
             if (_sensor != null)
