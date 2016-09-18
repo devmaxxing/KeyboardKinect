@@ -107,7 +107,9 @@ namespace KeyboardKinect
             {
                 if (frame != null)
                 {
-                    currentFrame = new Image<Bgr,Byte>(BitmapFromWriteableBitmap(frame.ToBitmap()));
+                    var bitmap = frame.ToBitmap();
+                    camera.Source = bitmap;
+                    currentFrame = new Image<Bgr,Byte>(BitmapFromWriteableBitmap(bitmap));
                     currentFrameCopy = currentFrame.Copy();
           
                     skinDetector = new YCrCbSkinDetector();
