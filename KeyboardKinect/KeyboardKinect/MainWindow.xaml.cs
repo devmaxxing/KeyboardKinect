@@ -1,5 +1,6 @@
 ﻿using LightBuzz.Vitruvius;
 using Microsoft.Kinect;
+using Emgu.CV;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -7,6 +8,11 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.IO;
+using Emgu.CV.Structure;
+using System;
+using Emgu.Util;
+using Emgu.CV.CvEnum;
 
 namespace KeyboardKinect
 {
@@ -98,6 +104,11 @@ namespace KeyboardKinect
         private void setDepthButton_click(object sender, RoutedEventArgs e)
         {
             calibrating = true;
+        }
+
+        private void addKeyButton_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }
