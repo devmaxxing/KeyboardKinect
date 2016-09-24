@@ -81,10 +81,6 @@ namespace KeyboardKinect
                 SendInput(2, Inputs, INPUT.Size);
                 return false;
             }
-            else
-            {
-                return true;
-            }
             return true;
         }
 
