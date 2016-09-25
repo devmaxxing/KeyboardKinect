@@ -14,7 +14,7 @@ namespace KeyboardKinect
         private String value;
 
         //Converts user input to ascii value to search for desired Code Short
-        KeyReg(String a)
+        public KeyReg(String a)
         {
             //Converts string into array of ASCII values
             byte[] asciiBytes = Encoding.ASCII.GetBytes(a);

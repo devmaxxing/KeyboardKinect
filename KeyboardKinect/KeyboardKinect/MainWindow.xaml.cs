@@ -39,6 +39,8 @@ namespace KeyboardKinect
             frameWidth = 512;
             frameHeight = 424;
 
+            //createTestKey();
+
             calib = new ushort[frameWidth * frameHeight];
 
             _sensor = KinectSensor.GetDefault();
@@ -106,15 +108,16 @@ namespace KeyboardKinect
         private List<int> getPixelIndices(Rectangle r)
         {
             List<int> keyPixels = new List<int>();
-            for(var x = 0; x<frameWidth; x++)
+            int xStart = (int)InkCanvas.GetLeft(r);
+            int xEnd = xStart + (int)r.Width;
+            int yStart = (int)InkCanvas.GetTop(r);
+            int yEnd = (int)r.Height + yStart;
+
+            for(var x = xStart; x<xEnd; x++)
             {
-                for(var y = 0; y<frameWidth; y++)
+                for(var y = yStart; y<yEnd; y++)
                 {
-                    HitTestResult result = VisualTreeHelper.HitTest(canvas, new Point(x, y));
-                    if (result != null)
-                    {
-                        keyPixels.Add(y * frameWidth + x);
-                    }
+                    keyPixels.Add(y * frameWidth + x);
                 }                
             }
             return keyPixels;
@@ -175,6 +178,20 @@ namespace KeyboardKinect
             }
         }
 
+        private void createTestKey()
+        {
+            Rectangle rect = new Rectangle();
+            rect.Stroke = Brushes.Red;
+            rect.Fill = Brushes.Transparent;
+            rect.Height = 50;
+            rect.Width = 50;
+            canvas.Children.Add(rect);
+            InkCanvas.SetLeft(rect, 100);
+            InkCanvas.SetTop(rect, 100);
+
+            keys.Add(new Key(rect, new KeyReg("a"), getPixelIndices(rect)));
+        }
+
         private void saveDataToFile(ushort[] depthData)
         {
             StreamWriter file = new StreamWriter("c:\\test.txt");
@@ -188,6 +205,12 @@ namespace KeyboardKinect
                 file.WriteLine();
             }
             file.Close();
+        }
+
+        private void clearButton_Click(object sender, RoutedEventArgs e)
+        {
+            canvas.Children.Clear();
+            keys.Clear();
         }
     }
 }
