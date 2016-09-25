@@ -12,5 +12,6 @@
         <Button x:Name="addKeyButton" Content="Add Key" HorizontalAlignment="Left" Height="20" Margin="0,429,0,-25" VerticalAlignment="Top" Width="59" Click="addKeyButton_Click"/>
         <Button x:Name="saveKeyboardButton" Content="Save Keyboard" HorizontalAlignment="Left" Height="20" Margin="64,429,0,-25" VerticalAlignment="Top" Width="101"/>
         <Button x:Name="clearButton" Content="Clear" HorizontalAlignment="Left" Height="20" Margin="170,429,0,-25" VerticalAlignment="Top" Width="40"/>
+        <Button x:Name="startButton" Content="Start Detecting" HorizontalAlignment="Left" Height="20" Margin="215,429,0,-25" VerticalAlignment="Top" Width="88" Click="startButton_Click"/>
     </Grid>
 </Window>
