@@ -65,7 +65,15 @@ namespace KeyboardKinect
                     }
                     if (detecting)
                     {
-
+                        ushort[] frameData = new ushort[frameWidth*frameHeight];
+                        frame.CopyFrameDataToArray(frameData);
+                        foreach(Key key in keys)
+                        {
+                            if(hitDetected(key.pixelIndices, frameData))
+                            {
+                                KeyReg.SendInputWithAPI(key.keyReg);
+                            }
+                        }
                     }else
                     {
                         camera.Source = ToBitmap(frame);
@@ -143,7 +151,7 @@ namespace KeyboardKinect
             return BitmapSource.Create(width, height, 96, 96, PixelFormats.Bgr32, null, pixelData, stride);
         }
 
-        private bool hitDetected(ushort[] keyPixels, ushort[] frame)
+        private bool hitDetected(List<int> keyPixels, ushort[] frame)
         {
             foreach(int i in keyPixels)
             {
@@ -159,8 +167,27 @@ namespace KeyboardKinect
             detecting = !detecting;
             if (detecting)
             {
+                startButton.Content = "Stop Detecting";
                 camera.Source = null;
+            }else
+            {
+                startButton.Content = "Start Detecting";
             }
+        }
+
+        private void saveDataToFile(ushort[] depthData)
+        {
+            StreamWriter file = new StreamWriter("c:\\test.txt");
+            for (var y = 0; y < frameHeight; y++)
+            {
+                file.Write(y + ": ");
+                for(var x = 0; x < frameWidth; x++)
+                {
+                    file.Write(depthData[y * frameWidth + x] + ", ");
+                }
+                file.WriteLine();
+            }
+            file.Close();
         }
     }
 }

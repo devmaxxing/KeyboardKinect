@@ -44,7 +44,7 @@ namespace KeyboardKinect
             }
         }
 
-        static Boolean SendInputWithAPI(KeyReg a)
+        public static Boolean SendInputWithAPI(KeyReg a)
         {
             if (a.checkcaps == 1)
             {

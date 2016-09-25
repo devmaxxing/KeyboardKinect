@@ -9,9 +9,9 @@ namespace KeyboardKinect
 {
     class Key
     {
-        Rectangle rect;
-        KeyReg keyReg;
-        List<int> pixelIndices;
+        public Rectangle rect { get; set; }
+        public KeyReg keyReg { get; set; }
+        public List<int> pixelIndices { get; set; }
 
         public Key(Rectangle r, KeyReg k, List<int> l)
         {
